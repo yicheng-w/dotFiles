@@ -1,0 +1,20 @@
+\documentclass{article}
+\begin{document}
+
+\begin{table}[h]
+\begin{tabular}{|c|c|c|}\hline
+\textbf{Job}&\textbf{Min Hourly Salary(\$)}&\textbf{Max Hourly Salary(\$)} \hline
+Data input&\$8.00&\$25.00\\
+Engineering/design&\$8.00&\$50.00\\
+Lab work (non-UROP)&\$9.25&\$20.00\\
+Programming&\$9.00&\$60.00\\
+Research&\$9.00&\$30.00\\
+Teaching and tutoring&\$9.00&\$60.00\\
+Technical support&\$8.00&\$35.00\\
+Web design&\$9.00&\$75.00\\
+\hline
+\textbf{Average}&\textbf{8.65625}&\textbf{44.375}\hline
+\end{tabular}
+\caption{Min and Max salaries for STEM}
+\end{table}
+\end{document}

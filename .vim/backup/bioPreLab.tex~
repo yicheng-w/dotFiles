@@ -1,0 +1,67 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{indentfirst}
+
+\begin{document}
+\title{Bio Prelab 2}
+\author{Yicheng Wang}
+\date{2015-03-05}
+\maketitle
+\noindent Ms. Hill\hfill Junior Biology
+\section{Prelab}
+\subsection{Natural History}
+\begin{enumerate}
+    \item What structure do all vertebrates share in common?
+
+        All vertebrates have what is called the vertebral column, or the spine. It is
+        a skeletal structure that also serves as an integral part of the
+        autonomous nervous system.
+
+    \item What does the term `amphibian' mean, and why is it a proper
+        classification for frogs?
+
+        Amphibians are identified by their fish-like embryos and their
+        metamorphosis when growing up, they also use their skin as an
+        air-exchange surface. These are all characteristics of a frog and
+        therefore frogs are amphibians.
+    \newcounter{enumTemp}
+    \setcounter{enumTemp}{\theenumi}
+\end{enumerate}
+\subsection{External Anatomy}
+\begin{enumerate}
+    \setcounter{enumi}{\theenumTemp}
+    \item Is it easy to tell a male and female frog apart? Explain.
+
+        It is very difficult to tell from an external appearance if the frog is
+        male or female because their outside anatomy look mostly the same.
+
+    \item What important function does the frog’s skin perform?
+
+        The skin functions as the frog's respiratory surface alongside the lung.
+
+    \item How are the positions of the frog’s eyes different from that of a
+        human, and why is this advantageous (or good) for the frog?
+
+        Unlike humans, frogs are not on top of the food chain, so they need to
+        look out for possible predators. Having eyes on their sides gives them a
+        wider vision whereas the human eye positioning gives humans a more
+        focused vision that aids in hunting.
+
+    \item What is the function of the tympanic membranes, and which human
+        structures are they most similar to?
+
+        The tympanic membranes transfer sound-waves into the inner ear of the
+        frog and is used for sound detection. It is similar to human eardrums.
+
+    \item Why are forelimbs smaller and less muscular than the hind legs?
+
+        Because the hind legs of the frog are used for jumping, swimming, and
+        other high-intensity functions, therefore it requires more muscle power
+        and is therefore more muscular.
+
+    \item What do muscles found in the frog’s upper leg move?
+
+
+    \item What do muscles found in the frog’s lower leg move?
+\end{enumerate}
+\end{document}

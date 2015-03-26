@@ -1,0 +1,50 @@
+f = open("workStudy.dat",'r').read().split("</tr>\n<tr>")
+
+STEMList = []
+NonSTEMList = []
+
+for i in f:
+    blah = i.replace("<td>", "").replace("</td>", "").split("\n")
+    while '' in blah:
+        blah.remove('')
+    print blah
+    if blah[1] == "NS":
+        NonSTEMList.append([blah[0], blah[2], blah[5]])
+    else:
+        STEMList.append([blah[0], blah[2], blah[5]])
+
+print STEMList
+print
+print NonSTEMList
+
+fout = open("STEM MONEY.tex", "w")
+stuff = """\\begin{table}[h]
+\\begin{tabular}{|c|c|c|}\\hline
+"""
+
+for i in STEMList:
+    stuff += i[0].replace("$", "\\$") + "&" + i[1].replace("$", "\\$") + "&" +
+    i[2].replace("$", "\\$") + "\\\\" + "\n"
+
+stuff += """\\hline
+\\end{tabular}
+\\end{table}"""
+
+fout.write(stuff)
+fout.close()
+
+fout = open("NON STEM MONEY.tex", "w")
+stuff = """\\begin{table}[h]
+\\begin{tabular}{|c|c|c|}\\hline
+"""
+
+for i in NonSTEMList:
+    stuff += i[0].replace("$", "\\$") + "&" + i[1].replace("$", "\\$") + "&" +
+    i[2].replace("$", "\\$") + "\\\\" + "\n"
+
+stuff += """\\hline
+\\end{tabular}
+\\end{table}"""
+
+fout.write(stuff)
+fout.close()

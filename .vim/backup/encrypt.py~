@@ -1,0 +1,1 @@
+open("doc.txt", "r").read()
