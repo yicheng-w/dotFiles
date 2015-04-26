@@ -114,7 +114,7 @@ git_prompt () {
             git_color="$URed"
         fi
 
-        printf "$ANSIDARKBLUE \b\b $ANSIRESET[$git_color$git_branch$ANSIRESET]"
+        printf "$ANSIDARKBLUE \b\b $ANSIRESET[$git_color$git_branch$ANSIRESET] "
     else
         printf ""
     fi
@@ -160,7 +160,7 @@ batteryInfo() {
         if [ "$batTime" == "" ]; then
             batTime="Full"
         fi
-        printf "$perc ($batTime)>" 2>/dev/null
+        printf "$perc ($batTime)> " 2>/dev/null
     fi
 }
 
@@ -173,6 +173,15 @@ Pwd() {
         fi
     else
         printf "$PWD" | sed -r "s|$HOME|~|g"
+    fi
+}
+
+dirPrompt() {
+    if [[ $showDirInfo == true ]]; then
+        fileCount=$(ls -l | wc -l | sed 's: ::g')
+        size=$(ls -lah | grep -m 1 total | sed 's/total //')
+        b="b"
+        printf "{ $fileCount files | $size$b } "
     fi
 }
 
@@ -198,13 +207,15 @@ function __prompt_cmd() {
         symbol2="[$EXIT] xx "
     fi
 
+    jobCount="{\j} "
+
     if [[ $EUID -ne 0 ]]; then
         symbol1="♞ "
     else
         symbol1="♛ "
     fi
 
-    PS1="[\\[$ANSIYELLOW\\]\$(time_prompt)\\[$ANSIRESET\\]] \\[$ANSIGREEN\\]\$(user_prompt)\\[$ANSIRESET\\]: \\[$ANSIBLUE\\]\$(Pwd)\\[$ANSIRESET\\] > \\[$ANSIMAGENTA\\]\$(SensorTemp)\$(ramUsage)\$(batteryInfo)\\[$ANSIRESET\\] \$(git_prompt)\n\\[$ANSIHI\\]$symbol1$symbol2$GITSTATUS\\[$ANSIRESET\\]"
+    PS1="[\\[$ANSIYELLOW\\]\$(time_prompt)\\[$ANSIRESET\\]] \\[$ANSIGREEN\\]\$(user_prompt)\\[$ANSIRESET\\]: \\[$ANSIBLUE\\]\$(Pwd)\\[$ANSIRESET\\] > \\[$ANSIMAGENTA\\]\$(SensorTemp)\$(ramUsage)\$(batteryInfo)\\[$ANSIRESET\\]\$(git_prompt)\\[$ANSIBLUE\\]\$(dirPrompt)\\[$ANSIRESET\\]\n\\[$ANSIHI\\]$symbol1$jobCount$symbol2$GITSTATUS\\[$ANSIRESET\\]"
 
 }
 
@@ -216,6 +227,7 @@ showUsr=true
 showHost=false
 showSysInfo=false
 shortenPath=true
+showDirInfo=false
 pwdLength=25
 
 sysInfo() {
@@ -247,6 +259,14 @@ shortenPath() {
         export shortenPath=true;
     else
         export shortenPath=false;
+    fi
+}
+
+dirInfo() {
+    if [[ $showDirInfo == false ]]; then
+        export showDirInfo=true;
+    else
+        export showDirInfo=false;
     fi
 }
 
@@ -304,6 +324,15 @@ back() {
     eval cd $(echo $OLDPWD | sed -r 's/[ ]+/\\ /g')
 }
 
+cleanVimBackup() {
+    read -p "Are you sure you want to delete all vim backups? " -n 1 -r
+    echo
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        exit 1
+    fi
+    rm ~/.vim/backup/*
+}
+
 # Git functions {{{
 git_check () {
 	if git rev-parse --git-dir > /dev/null 2>&1; then
@@ -323,8 +352,14 @@ status() { if git_check $0; then git status; else status; fi }
 
 pull() { if git_check $0; then git pull; else echo "Not a git directory!"; fi }
 
-# }}}
-# }}}
+branch() { if git_check $0; then git branch; else echo "Not a git directory!"; fi }
+
+merge() { if git_check $0; then git merge; else echo "Not a git directory!"; fi }
+
+reset() { if git_check $0; then git reset; else reset; fi }
+
+ # }}}
+ # }}}
  # aliases {{{
 alias sourceBash='source ~/.bashrc'
 alias aptproxyget='~/.aptproxyget/apt-proxy-get.sh'
