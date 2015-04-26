@@ -1,0 +1,8 @@
+import java.util.Array;
+
+public class Test {
+    public static void main(String[] args) {
+        boolean[] a = new boolean[3];
+        System.out.println(Array.toString(a));
+    }
+}

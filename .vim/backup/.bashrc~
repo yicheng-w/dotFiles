@@ -81,8 +81,8 @@ ANSIMAGENTA="\033[1;35m"
 ANSIBLUE="\033[1;36m"
 ANSIDARKGREEN="\033[0;32m"
 ANSIRESET="\033[m"
- 
- 
+
+
 #Underlined
 UBlack="\033[4;30m" # Black
 URed="\033[4;31m" # Red
@@ -92,7 +92,7 @@ UBlue="\033[4;34m" # Blue
 UPurple="\033[4;35m" # Purple
 UCyan="\033[4;36m" # Cyan
 UWhite="\033[4;37m" # White
- 
+
 # Background
 On_Black="\033[40m" # Black
 On_Red="\033[41m" # Red
@@ -102,18 +102,18 @@ On_Blue="\033[44m" # Blue
 On_Purple="\033[45m" # Purple
 On_Cyan="\033[46m" # Cyan
 On_White="\033[47m" # White
- 
+
 git_prompt () {
 	if git rev-parse --git-dir > /dev/null 2>&1; then
- 
+
         git_branch=$(git branch 2>/dev/null| sed -n '/^\*/s/^\* //p')
-     
+
         if git diff --quiet 2>/dev/null >&2; then
             git_color="$UGreen"
         else
             git_color="$URed"
         fi
- 
+
         printf "$ANSIDARKBLUE \b\b $ANSIRESET[$git_color$git_branch$ANSIRESET]"
     else
         printf ""
@@ -165,7 +165,15 @@ batteryInfo() {
 }
 
 Pwd() {
-    printf "$PWD" | sed -r "s|$HOME|~|g"
+    if [[ $shortenPath == true ]]; then
+        if [ $(printf "$PWD" | sed -r "s|$HOME|~|g" | wc -c | tr -d " ") -gt $pwdLength ]; then
+            printf "~/...$(echo -n $PWD | sed -e "s/.*\(.\{$pwdLength\}\)/\1/")"
+        else
+            printf "$PWD" | sed -r "s|$HOME|~|g"
+        fi
+    else
+        printf "$PWD" | sed -r "s|$HOME|~|g"
+    fi
 }
 
 EXIT=0
@@ -207,16 +215,18 @@ showTime=true
 showUsr=true
 showHost=false
 showSysInfo=false
+shortenPath=true
+pwdLength=25
 
 sysInfo() {
-     if [[ $showSysInfo == true ]]; then   
+     if [[ $showSysInfo == true ]]; then
         export showSysInfo=false
     else
         export showSysInfo=true
     fi
 }
 
-Showdate() {
+dateInfo() {
     if [[ $showDate == true ]]; then
         export showDate=false
     else
@@ -224,11 +234,19 @@ Showdate() {
     fi
 }
 
-Showhost() {
+hostInfo() {
     if [[ $showHost == true ]]; then
         export showHost=false;
     else
         export showHost=true;
+    fi
+}
+
+shortenPath() {
+    if [[ $shortenPath == false ]]; then
+        export shortenPath=true;
+    else
+        export shortenPath=false;
     fi
 }
 
@@ -318,13 +336,15 @@ alias sublime='~/.SublimeText/sublime_text'
 alias notepad++='wine ~/.wine/drive_c/Program\ Files\ \(x86\)/Notepad++/notepad++.exe'
 # some more ls aliases
 alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+alias la='ll -A'
+alias l='ll -a'
 alias netlogo="~/.netlogo-5.1.0/netlogo.sh"
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
+export TERM='xterm-256color'
+#alias vim='nvim'
 
 # }}}

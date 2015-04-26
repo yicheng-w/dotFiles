@@ -1,0 +1,8 @@
+b *0x080488ed
+r XXXXX-XXXXX-XXXXX-XXXXX-XXXXX
+x/s $eax
+c
+r XXXXY-XXXXY-XXXXY-XXXXY-XXXXY
+x/s $eax
+c
+quit

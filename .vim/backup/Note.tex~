@@ -553,4 +553,120 @@ dequeue is the equivalent to pop. There may also be \textbf{empty} and
 Front in a queue is more important than that of a stack, because one cannot
 simply pop and then push for the queue. But front is still not considered a
 basic command.
+
+\subsection{Assignment}
+Implement the queue with a single linked-list, and enqueue and dequeue should be
+able to run at constant time.
+
+\section{2015-03-31}
+\subsection{Maze}
+Review on the maze algorithm we did a few weeks ago:
+\begin{enumerate}
+    \item 2D array of chars
+    \item Recursive Deepth First Search
+\end{enumerate}
+
+
+However, if we had infinite resources, it may be better to do a breadth first
+search. This is a good strat when you suspect that the answer is closer by. This
+is  known as breadth first search.
+
+
+Example maze:
+\begin{lstlisting}
+       ---
+       |B|
+       ---
+       |C|
+     -----------
+     |D|A|E|F|G|
+     -----------
+       |H|
+       ---
+       |I|
+       ---------
+       |J|K|M|I|
+       ---------
+\end{lstlisting}
+
+
+We create a concept called the frontier, which is the "next square to be
+explored."
+
+If we start at square A in the example maze, the frontier would be consisted of
+E, C, D, and H. However, for argument's sake let's say E was the first square to
+be explored, after it is taken off of the frontier. the next square to be
+explored would be one of C, D and H instead of F. So the frontier should be
+stored as a FIFO system, i.e. a queue.
+
+Basic code snippet:
+\begin{lstlisting}[language=java]
+    public void solve(Node position) {
+        while (!frontier.empty()) {
+            current = frontier.dequeue();
+            if (current.equals(exit)) {
+                System.exit(0);
+            }
+            ... ... ...
+        }
+    }
+\end{lstlisting}
+
+\section{2015-4-22}
+\subsection{Boring Definition Day}
+\subsubsection{Graph/Trees}
+Trees are gateways to more powers
+
+Tree is a specification of graph, a graph is a collection of nodes (or vertices) and edges.
+
+A node holds stuff and an edge connects nodes.
+
+
+\textbf{A tree} is an acyclic graph such that one node is defined as "the root."
+
+A tree is either empty or has one or more nodes, each node can have 0 or more
+children and one node is designated as the root.
+
+\textbf{Leaf}: A node with 0 children.
+
+\textbf{Siblings}: Nodes that share a parent (1 level up only)
+
+\textbf{Path}: A sequence of edges/nodes that takes you from 1 place to another
+
+\textbf{Height}: The length of the longest root-to-leaf path
+
+\textbf{Full}: A tree is full means that every single node is either a leaf or
+has the fullest amount of children
+
+\textbf{Balance}: THe same number of children and node on both sides.
+
+\subsubsection{Binary Tree}
+\textbf{Binary Tree}: A tree in which each node is either a leaf or has 1 or 2
+chidren.
+
+\section{2015-4-23}
+\subsection{Design of the Node}
+
+The tree is based on a double-linked list, each node should have two private
+Nodes left, and right and generic data.
+
+\subsection{Binary Search Tree}
+
+It is a binary tree such that given any Node w/ value v, all the node in the
+left subtree has values < V and all nodes in the right subtree have values
+greater than V.
+
+\subsection{Sample Algorithms}
+\begin{lstlisting}[language=java]
+private Node Search (Node T, Integer i) {
+    while (T != null) {
+        int c = T.getData().compareTo(i);
+        if (c == 0) {
+            return T;
+        }
+        T = (c > 0) ? T.getRight() : T.getLeft();
+    }
+    return null;
+}
+\end{lstlisting}
 \end{document}

@@ -1,0 +1,113 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+
+\begin{document}
+\section{Prelab}
+\begin{enumerate}
+    \item Describe the general structure of the hemoglobin macromolecule.
+
+        A hemoglobin macromolecule has a quaternary structure similar to many of
+        the multi-subunit globular proteins. The macromolecule is composed of 4
+        myoglobin subunits arranged in a roughly tetrahedral fashion around a
+        heme group.
+
+    \item How does sickle hemoglobin differ in structure from normal hemoglobin?
+
+        Usually the structure of a hemoglobin is very flexible and allows red
+        blood cells to be flexible. However, the structure of a sickle
+        hemoglobin lacks the flexibility and get stuck in the blood vessels.
+
+    \item Describe the difference between autosomal and sex linked diseases. Is sickle cell an
+        autosomal or sex linked disease?
+
+        Sex linked diseases are diseases that are transferred via the sex
+        chromosomes, so if one parent has the disease the child also has the
+        disease. Autosomal diseases are transferred via the somatic
+        chromosomes. So the child will only receive the disease if both parents
+        have the disease. sickle cell is an autosomal disease.
+
+    \item What specific mutation causes sickle-cell disease?
+
+        The sickle-cell disease is caused by the mutation within chromosome 11
+        that governs the development of beta bonds.
+
+    \item Describe how the mutation manifests in protein structure and affects cell function.
+
+        The mutation changes a crucial structural characteristic of the
+        hemoglobin -- its flexibility. This affects its function by inhibiting
+        it from moving in the blood vessels.
+
+    \item What causes the symptoms of sickle-cell disease and how is it treated?
+
+        The inability to deliver oxygen to crucial organs such as the spleen,
+        liver, kidneys, heart, etc. causes the symptom of the disease. Without
+        oxygen, the cells at the affected organs die.
+
+        Another side effect is that sickle cells die faster than red blood
+        cells so the total count of red blood cells is also lower than healthy
+        levels.
+
+        A third effect is the clotting of the blood vessels as a result of all
+        the red blood cells that are stuck in there. This causes episodes of
+        pain called crises.
+
+        The treatment of the disease involves intake of antibiotics against
+        infections, folic acids to help build more red blood cells, and good
+        rest, hydration and avoiding strenuous physical activities.
+
+    \item What is the life expectancy rate in those who have sickle cell disease? Compare the
+        likelihood of survival in areas such as the United States versus underdeveloped countries.
+
+        Due to the availability of treatment and medications, the average life
+        expectancy of patients within the US is around 45 years. However, the
+        situation in underdeveloped countries is much worse, with infantry
+        death rates as high as 60-80\%.
+
+    \item What is the frequency of the sickle cell disease in the United States?
+
+        Sickle cell disease affects an estimated 90,000 - 100,000 Americans.
+
+    \item What causes malaria and how is it contracted? Describe the pathogen and its life cycle. You
+        may use a diagram if you choose.
+
+        Malaria is a parasite that invades two hosts, the female mosquito and
+        humans. It has alternation of generations, it spends its sporophyte
+        stage of life within the female mosquito and injects its gametophyte
+        inside the human blood as the mosquito takes a bite. Then the
+        gametophyte invades first the liver and then the red blood cells,
+        causing them to die. The gametophyte will then move on into the
+        mosquito when it takes a bloody bite.
+
+    \item What are the symptoms of malaria and how is it treated?
+
+        Malaria can be categorized into uncomplicated and complicated malaria.
+        Uncomplicated malaria has the symptoms of fever, headache, sweats,
+        chills, nausea, and body ache. While severe malaria has symptom
+        including impaired consciousness, severe anemia, acute respiratory
+        distress syndrome, acute kidney failure, etc.
+
+        Current treatment is mainly centered around the usage of anti-parasite
+        antibiotics, which does a pretty good job killing the parasite.
+
+    \item What is the relationship between sickle-cell disease and malaria? Please include any data
+        that you may find and remember to cite your sources.
+
+        It is fairly interesting how sickle-cell mechanism is actually a
+        defense against malaria. The sickle trait makes red blood cells a lot
+        less susceptible to the invasion of the malaria-causing-parasite.
+        However, if both parents have the sickle trait, then the child receives
+        sickle-cell disease.
+
+
+\end{enumerate}
+
+\section{Source Cited}
+http://en.wikipedia.org/wiki/Hemoglobin\newline
+http://learn.genetics.utah.edu/content/disorders/singlegene/sicklecell/\newline
+http://www.cdc.gov/ncbddd/sicklecell/data.html\newline
+http://www.nejm.org/doi/full/10.1056/NEJM199406093302303\newline
+http://www.cdc.gov/malaria\newline
+http://sickle.bwh.harvard.edu/malaria\_sickle.html\newline
+\end{document}

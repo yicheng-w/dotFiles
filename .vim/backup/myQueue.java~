@@ -16,6 +16,7 @@ public class myQueue<E> {
     public void enqueue(E data) {
         Node<E> tmp = new Node<E>(data);
         top.getNext().setPrevious(tmp);
+	tmp.setPrevious(top);
         tmp.setNext(top.getNext());
         top.setNext(tmp);
     }
@@ -32,6 +33,9 @@ public class myQueue<E> {
     }
 
     public E head() {
+        if (empty()) {
+            return null;
+        }
         return bottom.getPrevious().getData();
     }
 

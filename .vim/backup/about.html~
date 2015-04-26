@@ -1,0 +1,11 @@
+---
+layout: default
+title: About
+---
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            This is a pretty cool CTF.  If you have questions, you should check out the FAQ!
+        </div>
+    </div>
+</div>

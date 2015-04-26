@@ -1,0 +1,5 @@
+define _bashXorcise_
+    b *0x080488ed
+    r $arg0-$arg0-$arg0-$arg0-$arg0
+    x/s $eax
+end

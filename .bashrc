@@ -165,7 +165,15 @@ batteryInfo() {
 }
 
 Pwd() {
-    printf "$PWD" | sed -r "s|$HOME|~|g"
+    if [[ $shortenPath == true ]]; then
+        if [ $(printf "$PWD" | sed -r "s|$HOME|~|g" | wc -c | tr -d " ") -gt $pwdLength ]; then
+            printf "~/...$(echo -n $PWD | sed -e "s/.*\(.\{$pwdLength\}\)/\1/")"
+        else
+            printf "$PWD" | sed -r "s|$HOME|~|g"
+        fi
+    else
+        printf "$PWD" | sed -r "s|$HOME|~|g"
+    fi
 }
 
 EXIT=0
@@ -207,6 +215,8 @@ showTime=true
 showUsr=true
 showHost=false
 showSysInfo=false
+shortenPath=true
+pwdLength=25
 
 sysInfo() {
      if [[ $showSysInfo == true ]]; then
@@ -229,6 +239,14 @@ hostInfo() {
         export showHost=false;
     else
         export showHost=true;
+    fi
+}
+
+shortenPath() {
+    if [[ $shortenPath == false ]]; then
+        export shortenPath=true;
+    else
+        export shortenPath=false;
     fi
 }
 
@@ -318,7 +336,7 @@ alias sublime='~/.SublimeText/sublime_text'
 alias notepad++='wine ~/.wine/drive_c/Program\ Files\ \(x86\)/Notepad++/notepad++.exe'
 # some more ls aliases
 alias ll='ls -alF'
-alias la='ls -A'
+alias la='ll -A'
 alias l='ls -CF'
 alias netlogo="~/.netlogo-5.1.0/netlogo.sh"
 
@@ -326,5 +344,7 @@ alias netlogo="~/.netlogo-5.1.0/netlogo.sh"
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
+export TERM='xterm-256color'
+#alias vim='nvim'
 
 # }}}

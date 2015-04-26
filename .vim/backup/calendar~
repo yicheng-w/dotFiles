@@ -1,0 +1,16 @@
+/*
+ * Personal Calendar
+ */
+
+#ifndef _calendar_custom_
+#define _calendar_custom_
+
+#include <calendar.usholiday>
+#include <calendar.birthday>
+#include <calendar.history>
+#include <calendar.computer>
+#include <calendar.ubuntu>
+#include <calendar.todo>
+
+
+#endif /* !_calendar_custom_ */

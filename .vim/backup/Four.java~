@@ -1,0 +1,49 @@
+import java.util.Arrays;
+
+public class Four{
+    // This is the equation as described in the problem
+    public static int equation(int n) {
+        return n * n - 4 * n + 100;
+    }
+    public static void main(String[] args) {
+    /*
+	long ans = 0; 
+	long[] array = new long[100];
+	*/
+	int ans = 0;
+	int[] arr = new int[100];
+	int counter = 1;
+
+	for (counter = 1 ; counter <= 100 ; counter++) {
+        if (!(Arrays.contains(equation(counter)))) { // Check if this is a repeat
+            arr[counter-1] = equation(counter);
+        }
+        else { // If this is a repeat, put in 0 for that location
+            arr[counter-1] = 0;
+        }
+    }
+
+    for (int i : arr) {
+        ans += i;
+    }
+
+    System.out.println(ans);
+        /*
+        while (counter <= 100){
+            long temp = 0;
+            int check = 0;
+            temp = counter*counter - 4*counter +100;
+            while(array[check+1]!= 0){
+            if(temp == array[check])
+                break;
+            if (array[check] == 0){
+                array[check] = temp;
+                break;
+            }
+            check++;
+            }
+            counter ++;
+        }
+        */
+    }
+}

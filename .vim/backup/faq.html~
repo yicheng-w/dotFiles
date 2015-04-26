@@ -1,0 +1,49 @@
+---
+layout: default
+title: FAQ
+---
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>What is a CTF?</h2>
+            As the creators of <a href="https://picoctf.com/">picoCTF</a> put it, 
+            <blockquote>
+                CTFs (short for capture the flag) are a type of computer security competition.
+                Contestants are presented with a set of challenges which test their creativity,
+                technical (and googling) skills, and problem-solving ability. Challenges usually
+                cover a number of categories, and when solved, each yields a string
+                (called a flag) which is submitted to an online scoring service. CTFs are a
+                great way to learn a wide array of computer security skills in a safe, legal
+                environment, and are hosted and played by many security groups around the world
+                for fun and practice.
+            </blockquote>
+            <h2>Who is this for?</h2>
+            This CTF is designed for computer science students at Stuyvesant
+            High School. The difficulty level of challenges ranges from easy to
+            difficult, so there is something to test both the introductory
+            computer science student as well as the advanced one. Those who are
+            not students at Stuyvesant High School are encouraged to compete as
+            well, but will not be eligible for prizes. The goal of this CTF is
+            to introduce students, especially those in introductory computer
+            science courses or first-time CTF-ers, to basic computer security and problem-solving
+            skills that will prove valuable in further computer science
+            education, in addition to life in general.
+            <h2>What constitutes cheating in this competition?</h2>
+            Our rules are the same as in picoCTF,
+            <blockquote>
+                Attacking the scoring server (e.g. by brute-forcing), other teams,
+                or machines not explicitly designated as targets is cheating. This
+                includes both breaking into such machines and denying others access
+                to them (for example, by altering a key or ping-flooding).  Sharing
+                keys or providing overly-revealing hints with other teams is
+                cheating, as is being directly assisted by personnel outside the
+                team (using tools from the internet is OK; asking people on the
+                internet to help you solve the problem is not). We encourage you to
+                solve problems in novel and creative ways using all available
+                resources, but we do require that you solve them yourselves.
+            </blockquote>
+            <h2>Who made this?</h2>
+            This CTF was made by <a href="https://github.com/dannyqiu/">Danny Qiu</a>, <a href="https://github.com/ChesleyTan">Chesley Tan</a>, <a href="https://github.com/elc1798">Ethan Cheng</a>, <a href="https://github.com/alex-wyc">Yicheng Wang</a>, and <a href="https://github.com/Zabari">Daniel Zabari</a>, with moral support by <a href="https://github.com/IshraqBhuiyan">Ishraq Bhuiyan</a> and <a href="https://github.com/RZhanRichardZhan">Richard Zhan</a>.
+        </div>
+    </div>
+</div>

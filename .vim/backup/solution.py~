@@ -1,25 +1,19 @@
-#!/usr/bin/python
+f = open("cryptof3_trans", "r").read().split("\n")[:-1]
 
-import sys
-import math
-import struct
+a = []
 
-u = lambda x: struct.unpack('f', x)[0]
-p = lambda x: struct.pack('b', x)
+for i in f:
+    a.append(int(i, 16))
 
-if len(sys.argv) != 3:
-	sys.exit(1)
+result = a[0]
+a = a[1:]
 
-filename = sys.argv[1]
-key = math.radians(int(sys.argv[2]))
+for i in range(len(a)):
+    result = result ^ a[i]
+    print ("%x" % result)
 
-print key
+output = "%x" % (result)
 
-bs = open(filename, 'rb').read()
-dec = open(filename[0:filename.find(".")] + "_decoded" + sys.argv[2] +
-        filename[filename.find("."):], 'wb') # add "/decoded\ test/" before the filename for the actual flag
+print output
 
-for i in range(0,len(bs),8):
-	x, y = u(bs[i:i+4]), u(bs[i+4:i+8])
-	# F**K YOU PYTHON, YOU STUPID TRUNCATION, LEARN HOW TO ROUND YOU DING DONG
-	dec.write(p(round(x * math.cos(key) + y * math.sin(key), 0)) + p(round(y * math.cos(key) - x * math.sin(key), 0)))
+print ("0" + output).decode("hex")

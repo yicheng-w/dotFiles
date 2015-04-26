@@ -1,37 +1,33 @@
-import java.util.*;
-import java.io.*;
+public class Node<T implements Comparable<T>> {
+    private T data;
+    private Node<T> left;
+    private Node<T> right;
 
-public class Node<E> {
-    private E data;
-    private Node<E> next;
-
-    public Node() {
-        data = null;
-        next = null;
+    public Node(T newData){
+        data = newData;
     }
 
-    public Node(E s) {
-        data = s;
-        next = null;
+    public Node<T> getLeft() {
+        return left;
     }
 
-    public void setData(E s) {
-        data = s;
+    public Node<T> getRight() {
+        return right;
     }
 
-    public E getData() {
+    public T getData() {
         return data;
     }
 
-    public void setNext(Node<E> s) {
-        next = s;
+    public boolean isLeaf() {
+        return (left == null) && (right == null);
     }
 
-    public Node<E> getNext() {
-        return next;
+    public void setLeft(Node<T> newLeft) {
+        left = newLeft;
     }
 
-    public String toString() {
-        return ""+data;
+    public void setRight(Node<T> newRight) {
+        right = newRight;
     }
 }

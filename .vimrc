@@ -14,6 +14,7 @@ set lbr
 set tw=500
 set shiftwidth=4
 set tabstop=4
+set pastetoggle=<F10>
 inoremap {	{}<left>
 inoremap {<CR>	{<CR>}<Esc>O
 inoremap {{	{
@@ -34,7 +35,11 @@ inoremap /*<CR>	/*<CR>*/<ESC>O
 
 let g:solarized_termtrans = 1
 set background=dark
-colorscheme 256-grayvim
+if has('gui_running')
+    colorscheme solarized
+else
+    colorscheme 256-grayvim
+endif
 set hidden
 set linebreak
 set hlsearch
@@ -118,3 +123,6 @@ set statusline+=\ %P    " % through
 
 " Calculators!
 inoremap <C-A> <C-O>yiW<End>=<C-R>=<C-R>0<CR>
+
+noremap <C-d> :sh<CR>
+
