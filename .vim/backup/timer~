@@ -1,8 +1,0 @@
-#!/bin/bash
-SECS=5
-while [[ 0 -ne $SECS ]]; do
-    echo "$SECS.."
-    sleep 1
-    SECS=$[$SECS-1]
-done
-echo "TIME's UP"

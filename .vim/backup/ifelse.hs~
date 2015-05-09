@@ -1,1 +1,0 @@
-doubleSmallerNumber x y = if x > y then y * 2 else x * 2

@@ -1,6 +1,0 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-#define NUMBER_OF_RANDOMS 23
-
-double numbers[]
