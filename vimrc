@@ -36,7 +36,7 @@ inoremap /*<CR>	/*<CR>*/<ESC>O
 let g:solarized_termtrans = 1
 set background=dark
 if has('gui_running')
-    colorscheme solarized
+    colorscheme darkblue
 else
     colorscheme 256-grayvim
 endif
@@ -80,7 +80,7 @@ set undolevels=1000
 set undoreload=10000
 
 if !isdirectory($HOME . '/.vim/backup/')
-    call mkdir($HOME . './vim/backup/')
+    call mkdir($HOME . '/.vim/backup/')
 endif
 
 " spellcheck
@@ -126,3 +126,7 @@ inoremap <C-A> <C-O>yiW<End>=<C-R>=<C-R>0<CR>
 
 noremap <C-d> :sh<CR>
 
+" vim notes config
+let g:notes_directories = ['~/Documents/Notes']
+let g:notes_suffix = '.txt'
+let g:notes_ruler_text = 1

@@ -201,10 +201,10 @@ function __prompt_cmd() {
 
     if [ "$EXIT" = "0" ]; then
         ANSIHI=$ANSIGREEN
-        symbol2=">> "
+        symbol2="(\!)>> "
     else
         ANSIHI=$ANSIRED
-        symbol2="[$EXIT] xx "
+        symbol2="[$EXIT] (\!)xx "
     fi
 
     jobCount="{\j} "
