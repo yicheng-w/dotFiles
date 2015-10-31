@@ -55,12 +55,13 @@ plugins=(git)
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 #
-ZSH=~/.zsh
+ZSH=/home/yicheng-wang/.zsh
 
 HIST_STAMPS="mm/dd/yyyy"
+HISTSIZE=1000
+HISTFILESIZE=1000
+SAVEHIST=1000
 HISTFILE=~/.zsh_history
-HISTSIZE=5000
-SAVEHIST=5000
 setopt INC_APPEND_HISTORY
 setopt HIST_IGNORE_DUPS
 setopt HIST_REDUCE_BLANKS
@@ -195,6 +196,20 @@ function ramUsage() {
         echo "$(free -m | grep -Eo '[0-9]*' | head -7 | tail -1) MB | "
     fi
 }
+function cpuInfo() {
+    grep 'cpu' /proc/stat | head -n 1 | cut -d" " -f $1
+}
+function cpuUsage() {
+    if [[ $showSysInfo == true ]]; then
+        local idle=$(cpuInfo 6)
+        local active=$(($(cpuInfo 3) + $(cpuInfo 5) + $(cpuInfo 7)))
+        local total=$(($active + $idle))
+        local perc=$(bc <<< "scale = 2; $active * 100 / $total")
+        echo "$perc%% | "
+    fi
+}
+
+
 function batteryInfo() {
     if [[ $showSysInfo == true ]]; then
         data=$(acpi | grep -Eo "[0-9]*%|[0-9][0-9]:[0-9][0-9]:[0-9][0-9]")
@@ -207,6 +222,33 @@ function batteryInfo() {
     fi
 }
 
+function compactBattery() {
+    block="▉"
+    charging="⚡"
+    if [[ $(acpi | cut -d" " -f3) == 'Discharging,' ]]; then
+        charging=""
+    fi
+
+    data=$(acpi | grep -Eo "[0-9]*%" | cut -d'%' -f1)
+    blockcount=$((($data + 5) / 10))
+    blocks=""
+    for ((i = 0 ; i < $blockcount ; ++i)); do
+        blocks=$(echo $blocks$block);
+    done;
+    echo -n "%{$(tput bold)%}"
+    if [[ $charging == "" ]]; then
+        if [ $blockcount -gt 4 ]; then
+            echo -n "%{$(tput setaf 10)%}"
+        elif [ $blockcount -gt 2 ]; then
+            echo -n "%{$(tput setaf 11)%}"
+        else
+            echo -n "%{$(tput setaf 9)%}"
+        fi
+    else
+        echo -n "%{$(tput setaf 118)%}"
+    fi
+    echo "$charging $blocks%{$(tput sgr0)%}"
+}
 function Pwd() {
     if [[ $shortenPath == true ]]; then
         if [ $(printf "$PWD" | sed -r "s|$HOME|~|g" | wc -c | tr -d " ") -gt $pwdLength ]; then
@@ -222,9 +264,8 @@ function Pwd() {
 
 function dirPrompt() {
     if [[ $showDirInfo == true ]]; then
+        size=$(du -h -s | tr -d '\t.') 2> /dev/null
         fileCount=$(ls -l | wc -l | sed 's: ::g')
-        size=$(ls -lah | grep -m 1 total | sed 's/total //')
-        b="b"
         echo "%{$(tput bold)$(tput setaf 50)%}{ $fileCount files | $size$b } %{$(tput sgr0)%}"
     fi
 }
@@ -234,8 +275,7 @@ function networkPrompt() {
         if [[ $(nm-tool | sed -n "4p") < "State: disconnected" ]]; then
             # connected
             local network="$(nm-tool | sed -n '6p' | cut -d "[" -f2 | cut -d "]" -f1)"
-            local speed="$(nm-tool | grep "Speed")"
-            speed=$speed[22,-1]
+            local speed="$(nm-tool | grep "Speed" | cut -d ":" -f2 | tr -d ' ')"
             echo "%{$(tput bold)$(tput setaf 129)%}[ $network | $speed ] %{$(tput sgr0)%}"
         else
             echo "%{$(tput bold)$(tput setaf 11)%}[ Disconnected ] %{$(tput sgr0)%}"
@@ -255,10 +295,10 @@ function Sign() {
 
     if [ "$EXIT" = "0" ]; then
         echo -n "%{$(tput bold)$(tput setaf 10)%}"
-        symbol2="-(%!)->> "
+        symbol2="─(%!)─>> "
     else
         echo -n "%{$(tput bold)$(tput setaf 1)%}"
-        symbol2="-[$EXIT]-(%!)-xx "
+        symbol2="─[$EXIT]─(%!)─xx "
     fi
 
     if [[ $EUID -ne 0 ]]; then
@@ -276,11 +316,19 @@ function Sign() {
     else
         echo ""
     fi
-
 }
 
 EXIT=0
 #export PROMPT_COMMAND=__prompt_cmd
+UsingPS2=false
+
+TMOUT=1
+
+function TRAPALRM() {
+    if [[ $UsingPS2 == false ]]; then
+        zle reset-prompt
+    fi
+}
 
 function precmd() {
     CatchExitCode
@@ -288,21 +336,27 @@ function precmd() {
 
 setopt prompt_subst
 
-prompt1="\$(time_prompt) \$(user_prompt): \$(Pwd) > \$(git_prompt)\$(SensorTemp)\$(ramUsage)\$(batteryInfo)\$(networkPrompt)\$(dirPrompt)
+prompt1="\$(time_prompt) \$(user_prompt): \$(Pwd) > \$(git_prompt)\$(SensorTemp)\$(ramUsage)\$(cpuUsage)\$(batteryInfo)\$(networkPrompt)\$(dirPrompt)
 \$(Sign)"
 
-PS1=$prompt1
+PROMPT=$prompt1
+RPROMPT="\$(compactBattery)"
 
 # PS - 2
 
 function PS2Gen() {
     echo -n "%{$(tput bold)$(tput setaf 27)%}"
-    echo -n "       └(%_)->> "
+    # echo -n "       └(%_)─>> " clashes with reset-prompt, FIXME
+    echo -n "       └───────>> "
     echo "%{$(tput sgr0)%}"
+    export UsingPS2=true # DOESN'T DO CRAP FIXME
 }
 
-PS2="\$(PS2Gen)"
+function isUsingPS2() {
+    export UsingPS2=true
+}
 
+PS2="\$(PS2Gen)$(isUsingPS2)"
 
 # Config Options
 
@@ -388,6 +442,10 @@ function maxInfo() {
 
  # }}}
 # Global Functions {{{
+function demoPrompt() {
+    PS1="$ ";
+    PS2="";
+}
 function sourcezsh(){
     source ~/.zshrc
 }
@@ -478,23 +536,20 @@ function git_check () {
 }
 
 function add() { if git_check $0; then git add "$@" -A; else echo "Not a git directory!" ; fi }
-
-function commit() { if git_check $0; then git commit; else echo "Not a git directory!"; fi }
-
-function push() { if git_check $0; then git push ; else echo "Not a git directory!"; fi }
-
-function status() { if git_check $0; then git status; else command status; fi }
-
-function pull() { if git_check $0; then git pull; else echo "Not a git directory!"; fi }
-
-function branch() { if git_check $0; then git branch; else echo "Not a git directory!"; fi }
-
-function merge() { if git_check $0; then git merge; else echo "Not a git directory!"; fi }
-
-function reset() { if git_check $0; then git reset; else command reset; fi }
-
-function checkout() { if git_check $0; then git checkout; else echo "Not a git directory"; fi}
-
+function commit() { if git_check $0; then git commit $@; else echo "Not a git directory!"; fi }
+function push() { if git_check $0; then git push $@; else echo "Not a git directory!"; fi }
+function status() { if git_check $0; then git status; else command status $@; fi }
+function pull() { if git_check $0; then git pull $@; else echo "Not a git directory!"; fi }
+function branch() { if git_check $0; then git branch $@; else echo "Not a git directory!"; fi }
+function merge() { if git_check $0; then git merge $@; else echo "Not a git directory!"; fi }
+function reset() { if git_check $0; then git reset $@; else command reset $@; fi }
+function checkout() { if git_check $0; then git checkout $@; else echo "Not a git directory"; fi}
+function log() { if git_check $0; then git log --abbrev-commit; else echo "Not a git directory"; fi}
+function tree() { if git_check $0; then git log --graph --pretty=oneline --abbrev-commit; else command tree $@; fi}
+function diff() { if git_check $0; then git diff $@; else command diff $@; fi}
+function rm() { if git_check $0; then rm $@ && git rm $@; else command rm $@; fi}
+function ignored() { if git_check $0; then git ls-files --other --ignored --exclude-standard; else echo "Not a git directory"; fi}
+function stash() { if git_check $0; then git stash $@; else echo "Not a git directory"; fi }
  # }}}
 
 # }}}
@@ -510,12 +565,13 @@ alias retrieveOctoDex='~/.octodex/octodex-download.sh'
 alias haskell='ghci'
 alias blender='~/blender/blender'
 alias tunnelWhiteHat='ssh -D 9001 whitehatacademy.club -l whitehats'
+alias tunnelServer='ssh -D 9001 alex-wyc.me -l root'
 alias sublime='~/.SublimeText/sublime_text'
 alias notepad++='wine ~/.wine/drive_c/Program\ Files\ \(x86\)/Notepad++/notepad++.exe'
 
 alias netlogo="~/.netlogo-5.1.0/netlogo.sh"
-alias processing="~/.processing/processing-2.2.1/processing"
-alias processing-java="~/.processing/processing-2.2.1/processing-java"
+alias processing="~/.processing/processing"
+alias processing-java="~/.processing/processing-java"
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -525,5 +581,61 @@ export TERM='xterm-256color'
 alias sshServer="ssh root@104.236.86.43"
 
 alias nethackMod="~/nethackPersonal/games/nethack"
-alias clear="echo -ne '\0033\0143'"
+alias clearScreen="echo -ne '\0033\0143'"
+function woodo() {
+    if [[ $(id -u) == 0 ]]; then
+        echo '              @@@                      @@@              
+             @///@     /@@            @;  @             
+            @/  //@   /  ;@          @;;  @             
+           @//  ///@  @  ;;@        @;;;;;@             
+           @///////@  @;;;;;@@     @;;;;@@              
+           @///////@   @@;;;;;@  @@;;;;@                
+            @/////@      @/;;;;@@;;;;;@                 
+             @///@   @@@   @;;;;;;;;;@                  
+              @@@@  @///@   /@;;;;;@@                   
+               @;@ @/  //@    @;;;@                     
+           @@@ @;;@//  ///@   @;;;@                     
+          @///@ @;@///////@ @@;@;;@@                    
+         @/  //@@;@///////@@;;;@;;@;@@    @@@           
+        @//  ///@;;@/////@@ ; ;/;;;;;;@  @///@          
+        @///////@ ; @///@@ ; ; ;;;;;;;@ @/  //@         
+        @///////@; ;;@@@ @; ; ;;;;;;;;;@//  ///@        
+         @/////@; ; @     @;;;;;;;;@;;;@///////@        
+          @///@ @@;;@     @;;@;;;;;;;;;@///////@        
+           @@@    @;;@    @;;;;;;;;;;;;@@/////@   @@@   
+                  @;;@    @;;;;;;   @;;@ @///@   @///@  
+                  @;;;@   @;@    ;;;;;;@  @@@@  @/  //@ 
+                   @;;;@@@;;;;;;;;;;;;;@   @;@ @//  ///@
+                    @;;;;@;;;;;;;;;;;;@    @;@@@///////@
+                     @;;;@;;;;;;;;;;;;@   @ ; ;@///////@
+                      @;@;; ;;;;;;;;;;@   @; ;;;@/////@ 
+                      @;@;  ;;;;;;;;;@@@@@;;@@@;;@///@  
+                       @;; ;;;;;; ;;;;;;;;;@///@@ @@@   
+                       @;  ;;;;;  ;;;;;;@@@/  //@       
+                      @;; ;;;;;; ;;;@@@@ @//  ///@      
+                      @;;;;;;;;;;;;;@    @///////@      
+                     @;;;;;;  ;;;;;@     @///////@      
+                     @;;;;;   ;;;;@       @/////@       
+                    @;;;;;;  ;;;;;@        @///@        
+                    @;;;;;;;;;;;;@          @@@         
+                    @;;;;;;;;;;;;@                      
+                   @;;; ;;;;;;;;@                       
+                 /@@;;   ;;;;;;;@                       
+                /;;@;;   ;;;;;;;@                       
+               /  ;;;;   ;;;;;;;@                       
+               @  ;@;;; ;;;;;@;;;@                      
+               @;;;@;;;;;;;;@ ;;;@                      
+                @;;@;;;;;;;;@;;;;;@                     
+                @@;;@;;;;;;;;@;;;;;@@@@@                
+             @@@;;@;;@@;;;;;;;@@@;;;; ; @@              
+            @  ;;;;;;;;@@@@@@@   @;;;; ; ;@             
+           @;;;;;;;;;@@           @;;;;;;;@             
+            @;;;;;;@@              @@;;;;;@             
+             @@@@@@                  @@@@@'
+         else
+             echo "a weird tree";
+         fi
+}
+
+alias mazes="~/.maze/run.sh"
 # }}}
