@@ -152,13 +152,31 @@ function git_prompt() {
         git_branch=$(git branch 2>/dev/null| sed -n '/^\*/s/^\* //p')
 
         echo -n "["
-
-        if git diff --quiet 2>/dev/null >&2; then
-            echo "%{$(tput smul)$(tput setaf 28)%}$git_branch%{$(tput sgr0)%}] "
-        else
-            echo "%{$(tput smul)$(tput setaf 1)%}$git_branch%{$(tput sgr0)%}] "
-        fi
-
+        git for-each-ref --format="%(refname:short) %(upstream:short)" refs/heads |\
+        grep $git_branch |\
+        while read local remote
+        do
+            [ -z "$remote" ] && continue
+            LEFT_AHEAD='0'
+            RIGHT_AHEAD='0'
+            if [[ $showDiff == true ]]; then
+                git fetch -q 2>/dev/null
+                git rev-list --left-right ${local}...${remote} -- 2>/dev/null >/tmp/git_upstream_status_delta || continue
+                LEFT_AHEAD=$(grep -c '^<' /tmp/git_upstream_status_delta)
+                RIGHT_AHEAD=$(grep -c '^>' /tmp/git_upstream_status_delta)
+                if [[ $LEFT_AHEAD == '0' && $RIGHT_AHEAD == '0' ]]; then
+                    echo "%{$(tput smul)$(tput setaf 28)%}$git_branch%{$(tput sgr0)%}] "
+                else
+                    echo "%{$(tput smul)$(tput setaf 1)%}$git_branch (▲ $LEFT_AHEAD | ▼ $RIGHT_AHEAD)%{$(tput sgr0)%}] "
+                fi
+            else
+                if git diff --quiet 2>/dev/null >&2; then
+                    echo "%{$(tput smul)$(tput setaf 28)%}$git_branch%{$(tput sgr0)%}] "
+                else
+                    echo "%{$(tput smul)$(tput setaf 1)%}$git_branch%{$(tput sgr0)%}] "
+                fi
+            fi
+        done
     else
         echo ""
     fi
@@ -233,8 +251,11 @@ function compactBattery() {
     blockcount=$((($data + 5) / 10))
     blocks=""
     for ((i = 0 ; i < $blockcount ; ++i)); do
-        blocks=$(echo $blocks$block);
-    done;
+        blocks=$(echo $blocks$block)
+    done
+    for ((i = $blockcount ; i < 10 ; ++i)); do
+        blocks=$(echo "$blocks░")
+    done
     echo -n "%{$(tput bold)%}"
     if [[ $charging == "" ]]; then
         if [ $blockcount -gt 4 ]; then
@@ -245,9 +266,9 @@ function compactBattery() {
             echo -n "%{$(tput setaf 9)%}"
         fi
     else
-        echo -n "%{$(tput setaf 118)%}"
+        echo -n "%{$(tput setaf 10)%}"
     fi
-    echo "$charging $blocks%{$(tput sgr0)%}"
+    echo "$charging ▏$blocks▕%{$(tput sgr0)%}"
 }
 function Pwd() {
     if [[ $shortenPath == true ]]; then
@@ -320,14 +341,11 @@ function Sign() {
 
 EXIT=0
 #export PROMPT_COMMAND=__prompt_cmd
-UsingPS2=false
 
 TMOUT=1
 
 function TRAPALRM() {
-    if [[ $UsingPS2 == false ]]; then
-        zle reset-prompt
-    fi
+    zle reset-prompt
 }
 
 function precmd() {
@@ -368,7 +386,16 @@ showSysInfo=false
 shortenPath=true
 showDirInfo=false
 showNetworkInfo=false
+showDiff=false
 pwdLength=30
+
+function gitDiffInfo() {
+    if [[ $showDiff == true ]]; then
+        export showDiff=false
+    else
+        export showDiff=true
+    fi
+}
 
 function sysInfo() {
      if [[ $showSysInfo == true ]]; then
@@ -427,6 +454,7 @@ function defaultInfo() {
     export shortenPath=true;
     export showDirInfo=false;
     export showNetworkInfo=false;
+    export showDiff=false;
 }
 
 function maxInfo() {
@@ -438,6 +466,7 @@ function maxInfo() {
     export shortenPath=false;
     export showDirInfo=true;
     export showNetworkInfo=true;
+    export showDiff=true;
 }
 
  # }}}
@@ -538,7 +567,7 @@ function git_check () {
 function add() { if git_check $0; then git add "$@" -A; else echo "Not a git directory!" ; fi }
 function commit() { if git_check $0; then git commit $@; else echo "Not a git directory!"; fi }
 function push() { if git_check $0; then git push $@; else echo "Not a git directory!"; fi }
-function status() { if git_check $0; then git status; else command status $@; fi }
+function status() { if git_check $0; then git status $@; else command status $@; fi }
 function pull() { if git_check $0; then git pull $@; else echo "Not a git directory!"; fi }
 function branch() { if git_check $0; then git branch $@; else echo "Not a git directory!"; fi }
 function merge() { if git_check $0; then git merge $@; else echo "Not a git directory!"; fi }
@@ -547,7 +576,6 @@ function checkout() { if git_check $0; then git checkout $@; else echo "Not a gi
 function log() { if git_check $0; then git log --abbrev-commit; else echo "Not a git directory"; fi}
 function tree() { if git_check $0; then git log --graph --pretty=oneline --abbrev-commit; else command tree $@; fi}
 function diff() { if git_check $0; then git diff $@; else command diff $@; fi}
-function rm() { if git_check $0; then rm $@ && git rm $@; else command rm $@; fi}
 function ignored() { if git_check $0; then git ls-files --other --ignored --exclude-standard; else echo "Not a git directory"; fi}
 function stash() { if git_check $0; then git stash $@; else echo "Not a git directory"; fi }
  # }}}
