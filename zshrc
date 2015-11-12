@@ -165,7 +165,11 @@ function git_prompt() {
                 LEFT_AHEAD=$(grep -c '^<' /tmp/git_upstream_status_delta)
                 RIGHT_AHEAD=$(grep -c '^>' /tmp/git_upstream_status_delta)
                 if [[ $LEFT_AHEAD == '0' && $RIGHT_AHEAD == '0' ]]; then
-                    echo "%{$(tput smul)$(tput setaf 28)%}$git_branch%{$(tput sgr0)%}] "
+                    if git diff --quiet 2>/dev/null >&2; then
+                        echo "%{$(tput smul)$(tput setaf 28)%}$git_branch%{$(tput sgr0)%}] "
+                    else
+                        echo "%{$(tput smul)$(tput setaf 1)%}$git_branch%{$(tput sgr0)%}] "
+                    fi
                 else
                     echo "%{$(tput smul)$(tput setaf 1)%}$git_branch (▲ $LEFT_AHEAD | ▼ $RIGHT_AHEAD)%{$(tput sgr0)%}] "
                 fi
@@ -304,6 +308,16 @@ function networkPrompt() {
     fi
 }
 
+reminders=""
+
+function reminders_prompt() {
+    if [[ $reminders == "" ]]; then
+        echo ""
+    else
+        echo "%{$(tput setaf 11)%}(Reminder: $reminders)%{$(tput sgr0)%} "
+    fi
+}
+
 function CatchExitCode() {
     EXIT=$?
 }
@@ -345,7 +359,9 @@ EXIT=0
 TMOUT=1
 
 function TRAPALRM() {
-    zle reset-prompt
+    if [[ $showDiff == false ]]; then
+        zle reset-prompt
+    fi
 }
 
 function precmd() {
@@ -354,7 +370,7 @@ function precmd() {
 
 setopt prompt_subst
 
-prompt1="\$(time_prompt) \$(user_prompt): \$(Pwd) > \$(git_prompt)\$(SensorTemp)\$(ramUsage)\$(cpuUsage)\$(batteryInfo)\$(networkPrompt)\$(dirPrompt)
+prompt1="\$(time_prompt) \$(user_prompt): \$(Pwd) > \$(reminders_prompt)\$(git_prompt)\$(SensorTemp)\$(ramUsage)\$(cpuUsage)\$(batteryInfo)\$(networkPrompt)\$(dirPrompt)
 \$(Sign)"
 
 PROMPT=$prompt1
@@ -541,18 +557,16 @@ cleanVimBackup() {
 }
 
 function reminder() {
-    PS1="$PS1%{$(tput setaf 11)%}(Reminder: "
-
-    for word in "$@"
-    do
-        PS1="$PS1$word "
-    done
-    PS1="${PS1:0:$[${#PS1}-1]})%{$(tput sgr0)%} "
+    if [[ $reminders == "" ]]; then
+        reminders="$@"
+    else
+        reminders="$reminders, $@"
+    fi
     echo "Reminder set: $@"
 }
 
 function removeReminder() {
-    PS1=$prompt1
+    reminders=""
 }
 
 # Git functions {{{
