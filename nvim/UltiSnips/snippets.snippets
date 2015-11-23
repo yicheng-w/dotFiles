@@ -1,0 +1,11 @@
+snippet snippet "creates a snippet" b
+snippet ${1:tab string} "${2:description}" b
+$3
+`!p snip.rv="endsnippet"`
+endsnippet
+
+snippet global "creating global variable" b
+global $1
+$2
+endglobal
+endsnippet

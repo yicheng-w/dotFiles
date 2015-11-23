@@ -1,8 +1,6 @@
-" XXX
-
 set number
 set ruler
-call pathogen#infect('~/.nvim/bundle/{}')
+call pathogen#infect()
 filetype plugin indent on
 syntax enable
 syntax on
@@ -13,6 +11,7 @@ set wrap
 set confirm
 set mouse=a
 set lbr
+set tw=500
 set shiftwidth=4
 set tabstop=4
 set pastetoggle=<F10>
@@ -33,13 +32,10 @@ inoremap ""	"
 inoremap '	''<left>
 inoremap ''	'
 inoremap /*<CR>	/*<CR>*/<ESC>O
-inoremap /* /**/<left><left>
-inoremap $ $$<left>
-inoremap $$ $$
 
 let g:solarized_termtrans = 1
-colorscheme hybrid "256-grayvim
 set background=dark
+colorscheme 256-grayvim
 set hidden
 set linebreak
 set hlsearch
@@ -114,7 +110,7 @@ set statusline+=%{&ff}] " file format
 set statusline+=\ %m  " Modified flag
 set statusline+=%r  " RO flag
 set statusline+=\[%{strftime('%Y/%b/%d\ %a\ %I:%M\ %p')}\]
-" set statusline+=\ Char:\ 0x%04B  " current character
+set statusline+=\ Char:\ 0x%04B  " current character
 set statusline+=%= " Seperator
 set statusline+=\ WordCount:\ %{wordCount#WordCount()},  " Word counter
 set statusline+=%c, " cursor column
@@ -124,48 +120,4 @@ set statusline+=\ %P    " % through
 " Calculators!
 inoremap <C-A> <C-O>yiW<End>=<C-R>=<C-R>0<CR>
 
-tnoremap <ESC> <C-\><C-n><CR>
-
-" vim notes config
-let g:notes_directories = ['~/Documents/Notes']
-let g:notes_suffix = '.txt'
-let g:notes_ruler_text = 1
-
-" NERDTree config
-autocmd vimenter * NERDTree
-
-" ultisnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:UltiSnipsSnippetsDir="~/.nvim/UltiSnips"
-
-" YCM Options
-
-let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
-
-let g:ycm_register_as_syntastic_checker = 1 "default 1
-let g:Show_diagnostics_ui = 1 "default 1
-
-"will put icons in Vim's gutter on lines that have a diagnostic set.
-"Turning this off will also turn off the YcmErrorLine and YcmWarningLine
-"highlighting
-let g:ycm_enable_diagnostic_signs = 1
-let g:ycm_enable_diagnostic_highlighting = 0
-let g:ycm_always_populate_location_list = 1 "default 0
-let g:ycm_open_loclist_on_ycm_diags = 1 "default 1
-
-let g:ycm_complete_in_strings = 1 "default 1
-let g:ycm_collect_identifiers_from_tags_files = 0 "default 0
-let g:ycm_path_to_python_interpreter = '' "default ''
-
-let g:ycm_server_use_vim_stdout = 0 "default 0 (logging to console)
-let g:ycm_server_log_level = 'info' "default info
-
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'  "where to search for .ycm_extra_conf.py if not found
-let g:ycm_confirm_extra_conf = 1
-
-let g:ycm_goto_buffer_command = 'same-buffer' "[ 'same-buffer', 'horizontal-split', 'vertical-split', 'new-tab' ]
-let g:ycm_filetype_whitelist = { '*': 1 }
-let g:ycm_key_invoke_completion = '<C-Space>'
+noremap <C-d> :sh<cr>

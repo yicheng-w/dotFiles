@@ -1,0 +1,86 @@
+snippet block "block in latex" b
+\begin{${1:block}}
+$2
+\end{$1}
+endsnippet
+
+snippet init "begin document" b
+\documentclass[12 pt, twoside] {article}
+\usepackage[margin=1in]{geometry}
+
+\begin{document}
+$1
+\end{document}
+endsnippet
+
+snippet tikz "tikz picture" b
+\begin{figure}[ht]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis} [
+			scale only axis,
+			grid=major,
+			axis line=middle,
+			inner axis line style={->},
+			xmin=$1, xmax=$2,
+			ymin=$3, ymax=$4,
+			xlabel = $5,
+			ylabel = $6,
+		]
+		$7
+		\end{axis}
+	\end{tikzpicture}
+\end{figure}
+endsnippet
+
+snippet tikzb "tikz block" b
+\begin{tikzpicture}
+	\begin{axis} [
+		scale only axis,
+		grid=major,
+		axis line=middle,
+		inner axis line style={->},
+		xmin=$1, xmax=$2,
+		ymin=$3, ymax=$4,
+		xlabel = $5,
+		ylabel = $6,
+	]
+	$7
+	\end{axis}
+\end{tikzpicture}
+endsnippet
+
+snippet graphic "include graphic" b
+\begin{figure}[ht]
+	\includegraphics[width=${1:width}]{${2:location}}
+	\caption{${3:caption}}
+\end{figure}
+endsnippet
+
+snippet wrapfig "wrap figure snippet" b
+\begin{wrapfigure}{${1:location}}{${2:width}}
+	\centering
+	$3
+\end{wrapfigure}
+endsnippet
+
+snippet \begin "begin any block" b
+\begin{${1:name}}
+	$2
+\end{$1}
+endsnippet
+
+snippet norm "norm"
+||\+$1\+||
+endsnippet
+
+snippet booklet "creates a booklet" b
+\documentclass[12 pt, twoside] {article}
+\usepackage[letterpaper]{geometry}
+\usepackage{pdfpages}
+    \includepdfset{pages=-}
+
+\begin{document}
+    \includepdf[pages=-, nup=1x2, landscape, signature=${2:total pages}$]{${1:pdf name}$}
+\end{document}
+endsnippet

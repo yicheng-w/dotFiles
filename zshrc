@@ -149,7 +149,7 @@ source $ZSH/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 function git_prompt() {
 	if git rev-parse --git-dir > /dev/null 2>&1; then
 
-        git_branch=$(git branch 2>/dev/null| sed -n '/^\*/s/^\* //p')
+        git_branch=$(git branch 2>/dev/null | sed -n '/^\*/s/^\* //p')
 
         echo -n "["
         git for-each-ref --format="%(refname:short) %(upstream:short)" refs/heads |\
@@ -308,9 +308,8 @@ function networkPrompt() {
     fi
 }
 
-reminders=""
-
 function reminders_prompt() {
+    reminders="$(cat ~/.reminder | tr '\n' '; ' | cut -d';' -f2-)"
     if [[ $reminders == "" ]]; then
         echo ""
     else
@@ -359,7 +358,7 @@ EXIT=0
 TMOUT=1
 
 function TRAPALRM() {
-    if [[ $showDiff == false ]]; then
+    if [[ $showDiff == false && $changeClock == true ]]; then
         zle reset-prompt
     fi
 }
@@ -403,7 +402,16 @@ shortenPath=true
 showDirInfo=false
 showNetworkInfo=false
 showDiff=false
+changeClock=true
 pwdLength=30
+
+function changeClockInfo() {
+    if [[ $changeClock == true ]]; then
+        export changeClock=false;
+    else
+        export changeClock=true;
+    fi
+}
 
 function gitDiffInfo() {
     if [[ $showDiff == true ]]; then
@@ -557,16 +565,16 @@ cleanVimBackup() {
 }
 
 function reminder() {
-    if [[ $reminders == "" ]]; then
-        reminders="$@"
-    else
-        reminders="$reminders, $@"
-    fi
+    echo "$@" >> ~/.reminder
     echo "Reminder set: $@"
 }
 
-function removeReminder() {
-    reminders=""
+function remove_reminder() {
+    echo "" > ~/.reminder
+}
+
+function copy() {
+    cat $@ | xclip -selection clipboard
 }
 
 # Git functions {{{

@@ -1,0 +1,128 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{indentfirst}
+\usepackage{wrapfig}
+\usepackage{graphicx}
+
+\begin{document}
+
+\title{The Hunger Games -- Food in the Modern World}
+\author{Yicheng Wang}
+\date{2015-03-07}
+\maketitle
+\newpage
+
+\section*{Introduction}
+In our modern world, the choice of food are virtually infinite. With the
+development of agriculture and domestication, most of humanity no longer need
+to dedicate the majority of their lives in search for food. However, with more
+food comes more choices and it is very important to understand which ones are
+healthy and which ones are not.
+
+\section{FAD Diets}
+Fad diets usually advocate for absurd dietary conditions, either the type of
+food or the amount of food, to achieve unreasonable weight loss in short period
+of time. Most of the time, fad diets do work in the short term but are very bad
+for the person, both health-wise and weight-wise in the long run.
+
+\subsection{Special Case Study -- Fruitarianism}
+
+\begin{wrapfigure}{r}{0.5\textwidth}
+    \begin{center}
+    \includegraphics[width=0.48\textwidth]{fruits}
+    \end{center}
+\end{wrapfigure}
+This is the belief that one should only eat "fruits." Reasons for following this
+type of diet varies from people to people, including from environmental, relgious,
+cultural, asthetic, economic and health reasons. The strict definition of what
+is considered "fruitarian" also varies on a case-by-case basis, some people make
+it their duties to survive on a diet of 75\% fruits, while others believe that
+the diet should be composed of solely fruits. There are also various
+interpertations of what food can be eaten. While some believe that fruits involve
+grains and fruits, while others believe that it should be fruit-only. Even then
+there are disagreements over the definition of the word "fruit." Some believe it
+involves the seeds of plants while others believe that it only contain the juicy
+parts of the fruit. There are also debates regarding the allowance of nuts in a
+fruitarian diet. But the general idea is that the majority of the diet is
+composed of fruits.
+
+\begin{wrapfigure}{l}{0.3\textwidth}
+    \begin{center}
+        \includegraphics[width=0.28\textwidth]{"steve jobs"}
+        \caption{The CEO of Apple, Steve Jobs, a famed fruitarian}
+    \end{center}
+\end{wrapfigure}
+
+
+Health-wise, while some believe that this is a very healthy way of living, it is
+actually very, very dangerous. For one to survive, one need a healthy intake of
+fat, carbohydrates and proteins, whereas in a fruitarian diet, there is an
+absurdly high intake of carbohydrates and almost no fats nor proteins and a
+lacking of some important vitamins and minerals. Fruitarians usually suffer from
+difficiencies of vitamin B-12, D, calcium, zinc, iodine and omega-3 fatty acids.
+The overdose of carbohydrates also puts extreme pressure on the pancreas, which
+is tasked with blood carbohydrate regulation and the liver, which is tasked with
+carbohydrate digestion. In fact, one of the most famous fruitarians, Mr. Steve
+Jobs, the CEO of Apple died from pancreas cancer, and to a large extent his
+death can be attributed to his fruitarian diet.
+
+
+\section{Food Study}
+In our modern society, there are a lot of choices of food, each with distinct
+origins and health benefits. Below offers case studies of two popular Chinese
+foods -- Dumplings and Tofu to study their history and health values.
+
+\begin{wrapfigure}{L}{0.3\textwidth}
+    \begin{center}
+        \includegraphics[width=0.25\textwidth]{dumpling}
+    \end{center}
+\end{wrapfigure}
+
+\subsection{Dumplings}
+
+Dumpling is perhaps the most iconic Chinese food, and with all iconic foods of a
+culture, there really isn't a strict definition of the food, but the general
+idea is that it's a piece of dough wrapped around some form of meatball.
+However, the actual content does not have to be composed or even involve meat,
+it can be composed of purely vegetables, or a combination of both. According to
+folklores, during Han dynasty, the famed physician Zhongjing Zhang invented the
+dumpling during the Han dynasty to treat hunger in his home town. The dumpling
+is very easy to make and is pretty nutritious as well. The dough provides some
+carbohydrates and what is put inside the dough really determines the nutritional
+value. The food is prevalent all over China and has became\begin{wrapfigure}{R}{0.5\textwidth}
+    \begin{center}
+        \includegraphics[width=0.48\textwidth]{Billyfoodmabodofu3}
+    \end{center}
+    \caption{Mapo Tofu}
+    \vspace{-6.8cm}
+\end{wrapfigure}\textbf{the} iconic
+Chinese food to foreigners and is sold in literally every Chinese restaurant
+ever. The dumpling is usually by itself a main course in most Chinese
+restaurants and is not incorporated into any other dishes.
+
+\subsection{Tofu}
+
+Tofu, in short, is coagulating soy milk cut into rectangular pieces. Tofu was
+invented by the Chinese chemist Liu An in an unsuccessful attempt to create
+elixir during the Han Dynasty. (He is also attributed with the advancement of
+fire powder, while trying to invent elixir). The food is very widespread and has
+became an essential part of Chinese (if not Asian) cuisine. Tofu is very
+appealing due to its nutritional value, taste and accessibility. Tofu is not a
+part of the traditional western menu, but it does have to be eaten with
+utensils, usually spoons or chopsticks. Tofu and the process of making it varies
+from place to place, with different concentration of soy milk that induces
+different "firmness."
+
+\subsubsection{Mapo Tofu}
+This dish is especially popular in the Sichuan province in China. The dish is
+very simple to make, one simply cut the tofu into small rectangular pieces and
+pan-fried with minced pork, vegetables and chili oil.
+
+\newpage
+
+\section{References}
+
+Angela Haupt, Ashton Kutcher’s Fruitarian Diet: What Went Wrong?
+
+http://health.usnews.com/health-news/articles/2013/02/07/ashton-kutchers-fruitarian-diet-what-went-wrong
+\end{document}

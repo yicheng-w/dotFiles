@@ -1,0 +1,116 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{indentfirst}
+
+\begin{document}
+\title{Prelab for Lab \#3 -- Internal Organs of A Frog}
+\date{2015-03-04}
+\author{Yicheng Wang}
+\maketitle
+
+\section{Prelab}
+\subsection{First Cut}
+    \begin{itemize}
+    \item When dissecting the frog do you start with the ventral or dorsal side
+        up?
+
+    We start with the frog ventral (stomach) side facing up.
+
+\subsection{Digestive System}
+    \item Name and describe at least 4 organs in the digestive system.
+    \begin{itemize}
+        \item Pancreas: the gland that secrets most of the digestive enzymes for
+            the small intestine.
+        \item Liver: Secretes bile to emulsify fat.
+        \item Stomach: where food mix with digestive enzyme and some digestion
+            of fat and protein occurs.
+        \item Small intestine: where most of the chemical digestion/absorption occurs, with
+            the aid of digestive enzymes from the stomach and pancreas.
+    \end{itemize}
+
+\subsection{Respiratory System}
+    \item What organ connects the lungs to the mouth?
+
+    Glottis is the tube that connects the lungs to the mouth of a frog.
+
+    \item Frogs use which two organs to exchange gases?
+
+    Frogs use their skin and lung to exchange gases.
+
+\subsection{Circulatory System}
+    \item What are the 3 types of blood vessels?
+
+    The three types of blood vessels are: arteries, veins and capillaries. 
+
+    \item How does a frog heart differ from a human heart? Explain a reason for
+        this difference.
+
+    A frog heart has 2 atria but only 1 ventricle, whereas the human heart has
+    2 atria and 2 ventricle. This is because frogs are amphibian and it's easier
+    for them to get oxygen in water than it is for us on land. Therefore their
+    circulatory system does not have to be as efficient as that of a human.
+
+\subsection{Reproductive System}
+    \item What is the function of the fat bodies?
+
+    Fat bodies are the fat-storage units within a frog's body. They provide
+    energy for the frog during hibernation.
+
+    \item How is frog reproduction different from human reproduction?
+
+    Frog lays eggs which hatch into tadpole, which then develops into adult
+    frogs. Humans, on the other hand develop within the womb and is born mostly
+    developed.
+
+    \item Describe mating in frogs and the stages of frog development.
+
+    All frogs produce sexually, however, almost all frogs, egg fertilization
+    happens outside the female's body, with the male releasing the sperm at the
+    same time the female releases her eggs. After eggs are fertilized, they
+    first hatch into tadpoles, which then slowly transform into adult frogs.
+
+    \item How does the respiratory system change as the frog undergoes
+        metamorphosis from a tadpole to an adult frog?
+
+    As a tadpole, the young "frog" has no lung and conducts air exchange solely
+    through the skin (as it lives underwater). The metamorphosis causes the
+    tadpole to develop a lung.
+
+\subsection{Excretory System}
+    \item What are the main structures in both the human and frog excretory
+        system?
+
+    Both humans and frogs uses the kidney as their main structure for the
+    excretory system. Both uses the method of filtration to cleanse the blood of
+    unwanted substances.
+
+    \item What is the function of the kidneys and how does waste from the
+        kidneys exit the frog?
+
+    The kidneys filter nitrogenous waste out of the bloodstream of the frog and
+    those waste are then transferred to the urinary bladder and are then
+    excreted out of the body of the frog.
+
+\subsection{Nervous System}
+    \item List 3 structures that are part of a frog’s nervous system.
+
+    3 parts of a frog's nervous system are the brain, the spinal chord and the
+    sensory organs.
+
+    \item How is a frog brain different from a human brain?
+
+    First of all, the length of the brain of a frog is 2 cm and the average
+    weight is 0.1 g whereas for humans, the average length is approximately 10
+    cm. The human brain has a much larger association region that the frog
+    brain, which contributes to how humans can make complicated decisions.
+\end{itemize}
+
+\subsection{Source Cited}
+http://theworldofrogs.weebly.com/frog-anatomy-part-1---body-parts.html
+
+http://www.ask.com/pets-animals/frogs-excrete-waste-923981d255fbf56d
+
+http://m7science.wikispaces.com/Frog\_Dissection
+
+http://animals.howstuffworks.com/amphibians/frog4.htm
+\end{document}

@@ -1,0 +1,64 @@
+global !p
+def genvarlist(string, delim):
+	a = string.split(delim)
+	result = ""
+	for i in a:
+		result = result + '\t' + " * @param " + i.strip() + ': TODO\n'
+	return result[1:-1]
+endglobal
+
+snippet print "print line" b
+System.out.println($1);
+endsnippet
+
+snippet printf "printf" b
+System.out.printf($1);
+endsnippet
+
+snippet main "main function java" b
+public static void main(String[] args) {
+	$1
+}
+endsnippet
+
+snippet init "initialize a class" b
+import java.util.*;
+import java.io.*;
+
+public class `!p snip.rv = snip.basename` {
+	// Instance Variables
+
+	// Constructors
+	public `!p snip.rv = snip.basename`() {
+		// TODO
+	}
+
+	// Functions
+}
+endsnippet
+
+snippet class "creates a class" b
+public class ${1:name} {
+	// Instance Variables
+
+	// Constructors
+	public $1() {
+		// TODO
+	}
+
+	// Functions
+
+}
+endsnippet
+
+snippet func "function and docstring" b
+/**
+ * $3: ${5:A short description}
+`!p snip.rv=genvarlist(t[4], ',')`
+ * @return $6
+ * @throws $7
+ */
+${1:protection} ${2:type} ${3:function}(${4:params}) {
+	$8
+}
+endsnippet

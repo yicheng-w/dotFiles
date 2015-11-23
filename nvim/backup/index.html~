@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<link rel="icon" href="/images/logo.png"/>
+	<title>hiWorld!</title>
+	<link href="/style.css" rel="stylesheet" type="text/css" />
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script type="text/javascript"
+		  src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	</script>
+    <script src="jquery-1.11.2.min.js"></script>
+
+	<script>
+		$(function() {
+			$("#masthead").load("/masterhead.html");
+			$("#menunav").load("/menunav.html");
+			$("#footer").load("/footer.html");
+		});
+	</script>
+	<script type="text/javascript" src="/JS/CollapsibleLists.js"></script>
+</head>
+
+<body>
+<div id="wrap">
+  <div id="masthead">
+  </div>
+  <div id="menucontainer">
+    <div id="menunav">
+    </div>
+  </div>
+  <div id="container">
+    <div id="sidebar">
+        <h3>Archive</h3>
+        <ul class="collapsibleList">
+            <li>Sleepless Junior Year</li>
+            <li>MORE TO COME!!</li>
+        </ul>
+        <script>
+            CollapsibleLists.apply();
+        </script>
+    </div>
+    <div id="content">
+<!-- Main body -->
+	</div>
+  </div>
+  <div id="footer"></div>
+</div>
+</body>
+</html>

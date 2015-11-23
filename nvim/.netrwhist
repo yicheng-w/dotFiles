@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/home/yicheng-wang'
+let g:netrw_dirhist_2='/home/yicheng-wang/github/APCS_HW_SPRING'
+let g:netrw_dirhist_3='/home/yicheng-wang/github/APCS_HW_SPRING/notes'
+let g:netrw_dirhist_4='/home/yicheng-wang/github/src/GitHub_appref_ms'
+let g:netrw_dirhist_5='/home/yicheng-wang/github/src'
+let g:netrw_dirhist_6='/home/yicheng-wang/github/src/lib'
+let g:netrw_dirhist_7='/home/yicheng-wang/github/cstuy-ship-projects/theBot/test'
+let g:netrw_dirhist_8='/home/yicheng-wang/Documents/HACKING/stuyCTF-2016/Transform-80/release'
+let g:netrw_dirhist_9='/usr/share/icons/default'
