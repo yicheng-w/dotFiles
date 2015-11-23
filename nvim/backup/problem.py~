@@ -1,5 +1,0 @@
-import hashlib
-
-blah = hashlib.md5()
-blah.update("wyc98")
-print blah.hexdigest()
