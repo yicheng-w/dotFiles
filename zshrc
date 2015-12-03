@@ -44,13 +44,8 @@
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
-
 # User configuration
+#
 
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -530,6 +525,20 @@ stopwatch() {
     done
 }
 
+check_update() {
+    wget -q -O ~/.tmp/site-original $1;
+    while true
+    do
+        wget -q -O ~/.tmp/site-current $1;
+        if ! cmp ~/.tmp/site-original ~/.tmp/site-current >/dev/null 2>&1; then
+            xdg-open $1;
+            rm ~/.tmp/site-original ~/.tmp/site-current;
+            return;
+        fi
+        sleep $2
+    done
+}
+
 dropboxBackup() {
     dropbox start;
     cp -r $@ ~/Dropbox/
@@ -575,6 +584,10 @@ function remove_reminder() {
 
 function copy() {
     cat $@ | xclip -selection clipboard
+}
+
+function play_youtube() {
+    xterm -geometry 640x480 -fn 5x7 -e "youtube-dl -f 36 \"$@\" -o - | mplayer -cache 7000 -noautosub -really-quiet -monitorpixelaspect 0.7 -vo aa:driver=curses:contrast=40 - "
 }
 
 # Git functions {{{
