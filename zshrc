@@ -494,8 +494,18 @@ function demoPrompt() {
     PS1="$ ";
     PS2="";
 }
+
 function sourcezsh(){
     source ~/.zshrc
+}
+
+function kill() {
+    if [ "$#" -eq "1" ]; then
+        echo "HELLO"
+        kill -9 $1
+    else
+        kill $@
+    fi
 }
 
 function displayColors() {
@@ -504,7 +514,8 @@ function displayColors() {
     done;
     echo -n "$(tput sgr0)"
 }
-timer() {
+
+function timer() {
     SECS=$1
     while [[ 0 -ne $SECS ]]; do
         echo -n "$SECS..."

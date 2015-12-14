@@ -34,8 +34,6 @@ inoremap '	''<left>
 inoremap ''	'
 inoremap /*<CR>	/*<CR>*/<ESC>O
 inoremap /* /**/<left><left>
-inoremap $ $$<left>
-inoremap $$ $$
 
 let g:solarized_termtrans = 1
 colorscheme hybrid "256-grayvim
