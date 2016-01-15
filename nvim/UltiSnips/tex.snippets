@@ -1,3 +1,14 @@
+global !p
+def	gen_and_arr(num):
+	result = " "
+	try:
+		for i in range(1, len(num)):
+			result += " & "
+		return result
+	except:
+		return ""
+endglobal
+
 snippet block "block in latex" b
 \begin{${1:block}}
 $2
@@ -72,6 +83,12 @@ endsnippet
 
 snippet norm "norm"
 ||\+$1\+||
+endsnippet
+
+snippet matrix "create a matrix"
+\left[\begin{array}{${1:columns}}
+	$2`!p snip.rv=gen_and_arr(t[1])`\\\\
+\end{array}\right]
 endsnippet
 
 snippet booklet "creates a booklet" b

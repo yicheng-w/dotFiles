@@ -36,7 +36,7 @@ inoremap /*<CR>	/*<CR>*/<ESC>O
 inoremap /* /**/<left><left>
 
 let g:solarized_termtrans = 1
-colorscheme hybrid "256-grayvim
+colorscheme wombat256mod "hybrid 256-grayvim
 set background=dark
 set hidden
 set linebreak
