@@ -350,7 +350,7 @@ function Sign() {
 EXIT=0
 #export PROMPT_COMMAND=__prompt_cmd
 
-TMOUT=1
+#TMOUT=1
 
 function TRAPALRM() {
     if [[ $showDiff == false && $changeClock == true ]]; then
@@ -639,7 +639,7 @@ alias retrieveOctoDex='~/.octodex/octodex-download.sh'
 alias haskell='ghci'
 alias blender='~/blender/blender'
 alias tunnelWhiteHat='ssh -D 9001 whitehatacademy.club -l whitehats'
-alias tunnelServer='ssh -D 9001 alex-wyc.me -l root'
+alias tunnelServer='ssh -D 9001 104.236.86.43 -l root'
 alias sublime='~/.SublimeText/sublime_text'
 alias notepad++='wine ~/.wine/drive_c/Program\ Files\ \(x86\)/Notepad++/notepad++.exe'
 
