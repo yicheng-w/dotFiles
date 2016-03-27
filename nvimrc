@@ -2,7 +2,7 @@
 
 set number
 set ruler
-call pathogen#infect('~/.nvim/bundle/{}')
+call pathogen#infect('~/.vim/bundle/{}')
 filetype plugin indent on
 syntax enable
 syntax on
@@ -61,6 +61,8 @@ set completeopt=longest,menuone,preview
 set wildmode=longest,list,full
 set wildmenu
 
+set clipboard=unnamedplus
+
 " backup
 
 set backup
@@ -98,9 +100,29 @@ nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
 nnoremap <Leader>s :set spell!<CR>
 nnoremap <Leader>b :bnext<CR>
 
+function EnterWord()
+    if !exists('#Sentence#InsertCharPre')
+        augroup Sentence
+            autocmd InsertCharPre * if search('\v(%^|[.!?\n]\_s)\_s*%#', 'bcnw') != 0 | let v:char = toupper(v:char) | endif
+        augroup END
+    else
+        augroup Sentence
+            autocmd!
+        augroup END
+    endif
+
+    set spell!
+endfunction
+
+" word mode!!
+nnoremap <Leader>w :call EnterWord()<CR>
+
+" autocommands
+autocmd BufWritePost,FileWritePost *.tex :silent !pdflatex -interaction=nonstopmode % &> /dev/null
+
 " Chesley's word counter!
 
-set runtimepath+=$HOME/.vim/bundle/wordCount.vim
+set runtimepath+=$HOME/.vim/bundle/wordCount.vim 
 
 " Status line madness
 set statusline=[%n]\    " buffer number
