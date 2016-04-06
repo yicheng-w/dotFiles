@@ -652,8 +652,8 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 export TERM='xterm-256color'
 
-alias sshServer="ssh root@104.236.86.43"
-alias sshDojo="ssh yeech@162.243.115.175"
+alias sshServer="ssh -X root@104.236.86.43"
+alias sshDojo="ssh -X yeech@162.243.115.175"
 
 alias nethackMod="~/nethackPersonal/games/nethack"
 alias clearScreen="echo -ne '\0033\0143'"
