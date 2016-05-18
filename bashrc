@@ -384,3 +384,6 @@ export TERM='xterm-256color'
 
 # }}}
 
+
+# added by Anaconda2 4.0.0 installer
+export PATH="/home/yicheng-wang/anaconda2/bin:$PATH"

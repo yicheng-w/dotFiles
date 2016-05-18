@@ -1,0 +1,77 @@
+global !p
+def get_block_head(initial="/", symbol="*"):
+	return initial + symbol * 79
+
+def get_block_foot(initial=" ", symbol="*", end="/"):
+	return initial + symbol * 78 + end
+
+def get_right_wall(word, spaces, symbol=" ", end="*"):
+	return symbol * (79 - len(word) - spaces - 3) + end
+endglobal
+
+snippet block "block comment, usually up top" b
+`!p snip.rv=get_block_head()`
+ * ${1:Brief Description}`!p snip.rv=get_right_wall(t[1], 0)`
+ * `!p snip.rv=get_right_wall("", 0)`
+ * Authors`!p snip.rv=get_right_wall("Authors", 0)`
+ *  ${2:Authors}`!p snip.rv=get_right_wall(t[2], 1)`
+ * `!p snip.rv=get_right_wall("", 0)`
+ * Description`!p snip.rv=get_right_wall("Description", 0)`
+ *  ${3:In Depth Description}`!p snip.rv=get_right_wall(t[3], 1)`
+ * `!p snip.rv=get_right_wall("", 0)`
+`!p snip.rv=get_block_foot()`
+
+/* TODO
+ *  ${4:TODO-List}
+ */
+
+/* Dev Log
+ *  Project Created: `date "+%Y-%m-%d %H:%M"` - Yicheng W.
+ */
+endsnippet
+
+snippet time "gives the current time"
+`date "+%Y-%m-%d %H:%M"`
+endsnippet
+
+snippet "sec(tion)?" "block comment section" br
+/* ${1:SECTION} `!p snip.rv=get_right_wall(t[1], 2, "*")`/
+
+endsnippet
+
+snippet func "function initialization" b
+/* $2: ${4:a short description}
+ * TODO long description
+ */
+${1:type} ${2:function} (${3:arguments}){
+	$5
+}
+endsnippet
+
+snippet void "void function" b
+/* $1: ${3:a short description}
+ * TODO long description
+ */
+void ${1:function} (${2:arguments}){
+	$4
+}
+endsnippet
+
+snippet main "main function" b
+int main(int argc, char *argv[]) {
+	$1
+	return 0;
+}
+endsnippet
+
+snippet include "basic inclusions" b
+#include <stdlib.h>
+#include <stdio.h>
+endsnippet
+
+snippet ifndef "include protection" b
+#ifndef $1
+#define $1
+$2
+#endif // $1
+endsnippet

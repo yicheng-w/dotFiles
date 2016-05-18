@@ -140,7 +140,8 @@ source $ZSH/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # }}}
   # Custom Prompt {{{
  #
-
+alias ls="cd"
+alias cd="ls"
 function git_prompt() {
 	if git rev-parse --git-dir > /dev/null 2>&1; then
 
@@ -499,15 +500,6 @@ function sourcezsh(){
     source ~/.zshrc
 }
 
-function kill() {
-    if [ "$#" -eq "1" ]; then
-        echo "HELLO"
-        kill -9 $1
-    else
-        kill $@
-    fi
-}
-
 function displayColors() {
     for i in `seq 1 256`; do
         echo -n "$(tput bold)$(tput setaf $i) $i ";
@@ -713,4 +705,5 @@ function woodo() {
 }
 
 alias mazes="~/.maze/run.sh"
+alias downloadmoreram="sudo sync && sudo sysctl -w vm.drop_caches=3"
 # }}}

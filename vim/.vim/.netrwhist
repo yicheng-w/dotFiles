@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/root/github/APCS_HW_SPRING/03-usaco'
+let g:netrw_dirhist_2='/home/yeech/.vim/bundle/invader-vim/plugin'
+let g:netrw_dirhist_3='/home/yicheng-wang/.vim'
+let g:netrw_dirhist_4='/home/yicheng-wang/Documents/HACKING/stuyctf/Deeper/assets/deeper/how-deep-can-you-go'
+let g:netrw_dirhist_5='/home/yicheng-wang/Documents/HACKING/stuyctf/Benny-The-Bulbasaur_55/admin'
+let g:netrw_dirhist_6='/home/yicheng-wang/.vim'
+let g:netrw_dirhist_7='/home/yeech/github/neovim/.deps'
