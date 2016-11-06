@@ -140,8 +140,6 @@ source $ZSH/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # }}}
   # Custom Prompt {{{
  #
-alias ls="cd"
-alias cd="ls"
 function git_prompt() {
 	if git rev-parse --git-dir > /dev/null 2>&1; then
 
@@ -195,7 +193,8 @@ function time_prompt() {
 function user_prompt() {
     if $showUsr; then
         if $showHost; then
-            echo "%{$(tput bold)$(tput setaf 10)%}$USER@$(hostname)%{$(tput sgr0)%}"
+            local THEIP=$(ifconfig  | grep 'inet addr:'| grep -v '127.0.0.1' | cut -d: -f2 | awk '{ print $1}')
+            echo "%{$(tput bold)$(tput setaf 10)%}$USER@$(hostname) ($THEIP)%{$(tput sgr0)%}"
         else
             echo "%{$(tput bold)$(tput setaf 10)%}$USER%{$(tput sgr0)%}"
         fi
@@ -365,10 +364,31 @@ function precmd() {
 
 setopt prompt_subst
 
+function prompt_command() {
+    # real async uses filedescriptors and file hack
+    time_prompt > prompt_backing_file &
+    user_prompt > prompt_backing_file &
+    Pwd > prompt_backing_file &
+    reminders_prompt > prompt_backing_file &
+    git_prompt > prompt_backing_file &
+    SensorTemp > prompt_backing_file &
+    ramUsage > prompt_backing_file &
+    cpuUsage > prompt_backing_file &
+    batteryInfo > prompt_backing_file &
+    networkPrompt > prompt_backing_file &
+    dirPrompt > prompt_backing_file &
+    Sign > prompt_backing_file &
+    wait
+    exec 3< prompt_backing_file
+    cat <&3
+    #printf "%s %s: %s > %s%s%s%s%s%s%s%s\n%s" "$t" "$u" "$p" "$re" "$git" "$temp" "$ram" "$cpu" "$bat" "$net" "$dir" "$s"
+}
+
 prompt1="\$(time_prompt) \$(user_prompt): \$(Pwd) > \$(reminders_prompt)\$(git_prompt)\$(SensorTemp)\$(ramUsage)\$(cpuUsage)\$(batteryInfo)\$(networkPrompt)\$(dirPrompt)
 \$(Sign)"
 
 PROMPT=$prompt1
+#PROMPT="\$(prompt_command)"
 RPROMPT="\$(compactBattery)"
 
 # PS - 2
@@ -635,7 +655,7 @@ alias tunnelServer='ssh -D 9001 104.236.86.43 -l root'
 alias sublime='~/.SublimeText/sublime_text'
 alias notepad++='wine ~/.wine/drive_c/Program\ Files\ \(x86\)/Notepad++/notepad++.exe'
 
-alias netlogo="~/.netlogo-5.1.0/netlogo.sh"
+alias netlogo="~/.netlogo/NetLogo"
 alias processing="~/.processing/processing"
 alias processing-java="~/.processing/processing-java"
 # Add an "alert" alias for long running commands.  Use like so:
@@ -706,4 +726,14 @@ function woodo() {
 
 alias mazes="~/.maze/run.sh"
 alias downloadmoreram="sudo sync && sudo sysctl -w vm.drop_caches=3"
+alias up="cd .."
 # }}}
+
+export NVM_DIR="/home/yicheng-wang/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+export ANDROID_HOME=~/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:~/android-studio/bin
+
+alias eclipse-neon="sudo /opt/eclipse-neon/eclipse/eclipse"
+alias mendely="/opt/mendeleydesktop/bin/mendeleydesktop"

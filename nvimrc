@@ -35,6 +35,8 @@ inoremap ''	'
 inoremap /*<CR>	/*<CR>*/<ESC>O
 inoremap /* /**/<left><left>
 
+set printoptions=number:y,syntax:y,paper:letter
+
 let g:solarized_termtrans = 1
 colorscheme hybrid "wombat256mod 256-grayvim
 set background=dark
@@ -95,10 +97,15 @@ set cursorline
 
 hi CursorLine   cterm=underline ctermbg=59
 hi CursorColumn cterm=NONE ctermbg=green
+"let &colorcolumn=join(range(81,999),",")
+"let &colorcolumn="80,".join(range(400,999),",")
+highlight ColorColumn ctermbg=59
+set colorcolumn=80
 
 nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
 nnoremap <Leader>s :set spell!<CR>
 nnoremap <Leader>b :bnext<CR>
+
 
 function EnterWord()
     if !exists('#Sentence#InsertCharPre')
