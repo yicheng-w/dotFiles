@@ -737,3 +737,5 @@ export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:~/android-stu
 
 alias eclipse-neon="sudo /opt/eclipse-neon/eclipse/eclipse"
 alias mendely="/opt/mendeleydesktop/bin/mendeleydesktop"
+alias panalyze="python ~/INFORMS/analyzer.py"
+alias g++11="g++ -std=c++11 "
